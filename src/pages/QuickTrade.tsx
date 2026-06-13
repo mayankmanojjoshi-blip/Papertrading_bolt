@@ -40,6 +40,7 @@ export default function QuickTrade({ trades, onAdd, onUpdate, editingTrade, onCl
   const [notes, setNotes] = useState('');
   const [symbolInput, setSymbolInput] = useState('NIFTY');
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [quickMode, setQuickMode] = useState(true);
   const symbolRef = useRef<HTMLInputElement>(null);
   const strikeRef = useRef<HTMLInputElement>(null);
 
@@ -87,8 +88,7 @@ export default function QuickTrade({ trades, onAdd, onUpdate, editingTrade, onCl
         expiry,
         quantity: Number(quantity),
         direction,
-        entryPremium: Number(entryPremium),
-        currentPremium: Number(currentPremium),
+        currentPremium: Number(entryPremium),
         notes,
         lotSize,
       };
@@ -103,7 +103,7 @@ export default function QuickTrade({ trades, onAdd, onUpdate, editingTrade, onCl
         quantity: Number(quantity),
         direction,
         entryPremium: Number(entryPremium),
-        currentPremium: Number(currentPremium || entryPremium),
+        currentPremium: Number(entryPremium),
         notes,
         status: 'OPEN',
         timestamp: new Date().toISOString(),
@@ -219,8 +219,9 @@ export default function QuickTrade({ trades, onAdd, onUpdate, editingTrade, onCl
             </div>
           </div>
         </div>
-
+       {!quickMode && (
         {/* Strike + Expiry + Quantity */}
+          )}  
         <div className="flex gap-3">
           <div className="flex-1">
             <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">Strike Price</label>
@@ -275,19 +276,7 @@ export default function QuickTrade({ trades, onAdd, onUpdate, editingTrade, onCl
               placeholder="150.00"
             />
           </div>
-          <div className="flex-1">
-            <label className="block text-xs text-zinc-500 mb-1.5 uppercase tracking-wider">Current Premium</label>
-            <input
-              value={currentPremium}
-              onChange={e => setCurrentPremium(e.target.value)}
-              type="number"
-              step="0.05"
-              min="0"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-emerald-500"
-              placeholder="same as entry"
-            />
-          </div>
-          {previewPnL !== null && (
+                   {previewPnL !== null && (
             <div className="pb-0.5">
               <p className="text-xs text-zinc-500 mb-1.5">Unrealized P&L</p>
               <p className={`text-base font-bold ${previewPnL > 0 ? 'text-emerald-400' : previewPnL < 0 ? 'text-red-400' : 'text-zinc-400'}`}>
