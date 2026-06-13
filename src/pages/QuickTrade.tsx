@@ -4,7 +4,7 @@ import { generateId, calcUnrealizedPnL, formatCurrency } from '../storage';
 
 const COMMON_SYMBOLS = ['NIFTY', 'BANKNIFTY', 'FINNIFTY', 'MIDCPNIFTY', 'SENSEX', 'RELIANCE', 'TCS', 'INFY', 'HDFC', 'ICICIBANK', 'SBIN'];
 const LOT_SIZES: Record<string, number> = {
-  NIFTY: 25, BANKNIFTY: 15, FINNIFTY: 40, MIDCPNIFTY: 75, SENSEX: 10,
+  NIFTY: 30, BANKNIFTY: 30, FINNIFTY: 40, MIDCPNIFTY: 75, SENSEX: 10,
   RELIANCE: 250, TCS: 150, INFY: 300, HDFC: 550, ICICIBANK: 700, SBIN: 1500,
 };
 
